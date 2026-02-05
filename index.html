@@ -6,13 +6,8 @@
   <title>Bibu 💖</title>
 
   <style>
-    :root{
-      --overlay: rgba(0,0,0,.45);
-      --card: rgba(255,255,255,.86);
-      --text: #1f1f1f;
-    }
-
-    *{ box-sizing: border-box; }
+    :root { --bg1:#ffe4ec; --bg2:#f8a5c2; --card:#ffffffcc; --text:#222; }
+    * { box-sizing: border-box; }
 
     body{
       margin:0;
@@ -20,137 +15,89 @@
       display:grid;
       place-items:center;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      color: var(--text);
+      background: radial-gradient(circle at top, var(--bg1), var(--bg2));
+      color:var(--text);
       overflow:hidden;
-      background: #111;
-    }
-
-    /* Background layer */
-    .bg{
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      opacity: 0;
-      transition: opacity 1200ms ease;
-      transform: scale(1);
-      will-change: transform, opacity;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      filter: saturate(1.05) contrast(1.05);
-    }
-
-    /* Cinematic slow zoom */
-    .bg.zoom{
-      animation: kenburns 22s ease-in-out infinite alternate;
-    }
-
-    @keyframes kenburns{
-      0%   { transform: scale(1) translate3d(0,0,0); }
-      100% { transform: scale(1.08) translate3d(-1.5%, -1%, 0); }
-    }
-
-    /* Overlay for readability */
-    .overlay{
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      background: linear-gradient(var(--overlay), var(--overlay));
-    }
-
-    /* Respect reduced motion */
-    @media (prefers-reduced-motion: reduce){
-      .bg.zoom{ animation: none; }
     }
 
     .card{
-      width: min(560px, 92vw);
-      padding: 30px 24px;
-      background: var(--card);
-      border-radius: 22px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.38);
-      text-align: center;
-      backdrop-filter: blur(10px);
+      width:min(540px, 92vw);
+      padding:30px 24px;
+      background:var(--card);
+      border-radius:22px;
+      box-shadow: 0 20px 55px rgba(0,0,0,.2);
+      text-align:center;
+      backdrop-filter: blur(12px);
       position: relative;
       z-index: 2;
     }
 
-    h1{
-      margin: 6px 0 12px;
-      font-size: clamp(26px, 4vw, 34px);
-    }
-
-    p{
-      margin: 0 0 18px;
-      opacity: .9;
-      font-size: 17px;
-      line-height: 1.35;
-    }
+    h1{ margin:6px 0 14px; font-size: clamp(26px, 4vw, 34px); }
+    p{ margin:0 0 18px; opacity:.86; font-size:17px; line-height:1.35; }
 
     .stage{
-      position: relative;
-      width: 100%;
-      height: 190px;
-      margin-top: 10px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.62);
-      overflow: hidden;
+      position:relative;
+      width:100%;
+      height:185px;
+      margin-top:10px;
+      border-radius:18px;
+      background: rgba(255,255,255,.45);
+      overflow:hidden;
     }
 
     .btn{
-      position: absolute;
-      border: 0;
-      border-radius: 999px;
-      padding: 14px 24px;
-      font-size: 18px;
-      cursor: pointer;
-      user-select: none;
+      position:absolute;
+      border:0;
+      border-radius:999px;
+      padding:14px 24px;
+      font-size:18px;
+      cursor:pointer;
+      user-select:none;
+      box-shadow: 0 10px 22px rgba(0,0,0,.14);
+      transition: transform .12s ease;
       touch-action: manipulation;
-      box-shadow: 0 10px 22px rgba(0,0,0,.18);
-      transition: transform 120ms ease;
     }
-    .btn:active{ transform: scale(.98); }
+
+    .btn:active{ transform: scale(.97); }
 
     #yes{
-      background: #22c55e;
-      color: #fff;
-      left: 50%;
-      top: 65%;
+      background:#22c55e;
+      color:white;
+      left:50%;
+      top:65%;
       transform: translate(-120%, -50%);
     }
 
     #no{
-      background: #ef4444;
-      color: #fff;
-      left: 50%;
-      top: 65%;
+      background:#ef4444;
+      color:white;
+      left:50%;
+      top:65%;
       transform: translate(20%, -50%);
     }
 
     .footer{
-      margin-top: 16px;
-      font-size: 13px;
-      opacity: .75;
-      min-height: 18px;
+      margin-top:16px;
+      font-size:13px;
+      opacity:.7;
+      min-height:18px;
     }
 
-    /* Hearts */
-    .heart{
+    /* Floating hearts */
+    .heart {
       position: fixed;
       left: 50%;
-      top: 72%;
+      top: 70%;
       font-size: 22px;
+      animation: floatUp 1.8s ease-in forwards;
       pointer-events: none;
       z-index: 3;
-      filter: drop-shadow(0 10px 12px rgba(0,0,0,.18));
-      animation: floatUp 1800ms ease-in forwards;
-      will-change: transform, opacity;
     }
 
-    @keyframes floatUp{
+    @keyframes floatUp {
       0%   { transform: translate(-50%, 0) scale(1); opacity: 0; }
       10%  { opacity: 1; }
-      100% { transform: translate(calc(-50% + var(--dx)), calc(-260px + var(--dy))) scale(1.45); opacity: 0; }
+      100% { transform: translate(calc(-50% + var(--dx)), -260px) scale(1.4); opacity: 0; }
     }
 
     /* Hidden YouTube player */
@@ -166,9 +113,6 @@
 </head>
 
 <body>
-  <div class="bg zoom" id="bg"></div>
-  <div class="overlay"></div>
-
   <div class="card" id="card">
     <h1>Bibu… 💕</h1>
     <p>
@@ -184,10 +128,84 @@
     <div class="footer" id="footer">Choose wisely, Bibu 😌</div>
   </div>
 
-  <div id="playerWrap" aria-hidden="true"></div>
+  <div id="playerWrap"></div>
 
   <script>
-    // Photo embedded as Base64 (no upload needed)
-    const bgBase64 = `
-/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU
-::contentReference[oaicite:0]{index=0}
+    const stage = document.getElementById("stage");
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const footer = document.getElementById("footer");
+    const card = document.getElementById("card");
+    const playerWrap = document.getElementById("playerWrap");
+
+    const teaseLines = [
+      "Nice try, Bibu 😏",
+      "Not so easy 😌",
+      "Too slow, Bibu 😄",
+      "That button is shy 🙈",
+      "No is not an option 💖"
+    ];
+
+    function tease() {
+      footer.textContent = teaseLines[Math.floor(Math.random() * teaseLines.length)];
+    }
+
+    function moveNo() {
+      const pad = 14;
+      const s = stage.getBoundingClientRect();
+      const b = noBtn.getBoundingClientRect();
+      const x = Math.random() * (s.width - b.width - pad) + pad;
+      const y = Math.random() * (s.height - b.height - pad) + pad;
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+      noBtn.style.transform = "translate(0,0)";
+    }
+
+    window.onload = moveNo;
+
+    stage.addEventListener("mousemove", (e) => {
+      const r = noBtn.getBoundingClientRect();
+      const dx = e.clientX - (r.left + r.width / 2);
+      const dy = e.clientY - (r.top + r.height / 2);
+      if (Math.hypot(dx, dy) < 90) {
+        tease();
+        moveNo();
+      }
+    });
+
+    noBtn.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      tease();
+      moveNo();
+    }, { passive:false });
+
+    function hearts(n=20){
+      for(let i=0;i<n;i++){
+        const h=document.createElement("div");
+        h.className="heart";
+        h.textContent=Math.random()<0.5?"💖":"💘";
+        h.style.setProperty("--dx",(Math.random()*300-150)+"px");
+        h.style.animationDelay=(Math.random()*0.3)+"s";
+        document.body.appendChild(h);
+        h.addEventListener("animationend",()=>h.remove());
+      }
+    }
+
+    function playSong(){
+      playerWrap.innerHTML = `
+        <iframe src="https://www.youtube.com/embed/Sh8ZYHnb86c?autoplay=1&playsinline=1"
+        allow="autoplay; encrypted-media"></iframe>`;
+    }
+
+    yesBtn.addEventListener("click",()=>{
+      hearts();
+      playSong();
+      card.innerHTML = `
+        <h1>YAYYY 💖</h1>
+        <p>Bibu, you just made me the happiest person today.</p>
+        <p>Happy Valentine’s Day 💕<br>I can’t wait to celebrate us.</p>
+      `;
+    });
+  </script>
+</body>
+</html>
